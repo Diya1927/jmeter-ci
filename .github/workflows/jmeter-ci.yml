@@ -31,7 +31,7 @@ jobs:
           jmeter -n \
              -t jmeter/testplans/JM-c.jmx \
             -l results.jtl \
-             JSMTP_USER=${{ secrets.SMTP_USER }} \
+            -JSMTP_USER=${{ secrets.SMTP_USER }} \
             -JSMTP_PASS=${{ secrets.SMTP_PASS }}
 
       - name: Upload JMeter HTML Report
