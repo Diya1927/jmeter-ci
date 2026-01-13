@@ -22,17 +22,22 @@ jobs:
 
       - name: Install JMeter
         run: |
-          wget https://downloads.apache.org//jmeter/binaries/apache-jmeter-5.6.3.tgz
+          wget https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.6.3.tgz
           tar -xzf apache-jmeter-5.6.3.tgz
           echo "$(pwd)/apache-jmeter-5.6.3/bin" >> $GITHUB_PATH
 
-      - name: Run JMeter Test
+      - name: Run JMeter Test and Generate HTML Report
         run: |
           jmeter -n \
-             -t jmeter/testplans/JM-c.jmx \
+            -t jmeter/testplans/JM-c.jmx \
             -l results.jtl \
+            -e \
+            -o jmeter-report \
             -JSMTP_USER=${{ secrets.SMTP_USER }} \
             -JSMTP_PASS=${{ secrets.SMTP_PASS }}
+
+      - name: Verify Report Files
+        run: ls -R
 
       - name: Upload JMeter HTML Report
         uses: actions/upload-artifact@v4
