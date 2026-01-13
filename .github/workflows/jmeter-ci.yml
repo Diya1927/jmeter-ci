@@ -32,3 +32,8 @@ jobs:
             -t jmeter/testplans/JM-c.jmx \
             -l results.jtl \
             -e -o jmeter-report
+      - name: Upload JMeter HTML Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jmeter-html-report
+          path: jmeter-report
