@@ -25,3 +25,10 @@ jobs:
           wget https://downloads.apache.org//jmeter/binaries/apache-jmeter-5.6.3.tgz
           tar -xzf apache-jmeter-5.6.3.tgz
           echo "$(pwd)/apache-jmeter-5.6.3/bin" >> $GITHUB_PATH
+
+      - name: Run JMeter Test
+        run: |
+          jmeter -n \
+            -t jmeter/testplans/JM-c.jmx \
+            -l results.jtl \
+            -e -o jmeter-report
