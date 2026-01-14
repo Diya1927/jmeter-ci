@@ -260,7 +260,7 @@ ${responseBody}
               </FloatProperty>
             </ThroughputController>
             <hashTree/>
-            <SmtpSampler guiclass="SmtpSamplerGui" testclass="SmtpSampler" testname="SMTP Sampler" enabled="true">
+            <SmtpSampler guiclass="SmtpSamplerGui" testclass="SmtpSampler" testname="SMTP Sampler">
               <stringProp name="SMTPSampler.server">smtp.gmail.com</stringProp>
               <stringProp name="SMTPSampler.serverPort">587</stringProp>
               <stringProp name="SMTPSampler.mailFrom">madihasol123@gmail.com</stringProp>
@@ -284,8 +284,8 @@ ${responseBody}
               <boolProp name="SMTPSampler.use_eml">false</boolProp>
               <stringProp name="SMTPSampler.emlMessageToSend"></stringProp>
               <stringProp name="SMTPSampler.useAuth">true</stringProp>
-              <stringProp name="SMTPSampler.password">${__P(SMTP_PASS)}</stringProp>
-              <stringProp name="SMTPSampler.username">${__P(SMTP_USER)}</stringProp>
+              <stringProp name="SMTPSampler.password">${SMTP_PASS}</stringProp>
+              <stringProp name="SMTPSampler.username">${SMTP_USER}</stringProp>
               <stringProp name="SMTPSampler.messageSizeStatistics">false</stringProp>
               <stringProp name="SMTPSampler.enableDebug">true</stringProp>
               <collectionProp name="SMTPSampler.headerFields">
