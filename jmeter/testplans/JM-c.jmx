@@ -18,6 +18,10 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Transaction Controller">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+        </TransactionController>
+        <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request">
           <stringProp name="HTTPSampler.domain">${BASE_URL}</stringProp>
           <stringProp name="HTTPSampler.port">${PORT}</stringProp>
@@ -109,7 +113,7 @@ log.info(&quot;Generated User -&gt; Name: ${name}, Age: ${age}, Email: ${email}&
             <stringProp name="DurationAssertion.duration">500</stringProp>
           </DurationAssertion>
           <hashTree/>
-          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor">
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor" enabled="true">
             <stringProp name="scriptLanguage">groovy</stringProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>
@@ -237,51 +241,65 @@ ${responseBody}
           <boolProp name="displaySystemProperties">false</boolProp>
         </DebugSampler>
         <hashTree/>
-        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(vars.get(&apos;sendEmail&apos;) == &apos;true&apos;)}</stringProp>
-          <boolProp name="IfController.evaluateAll">false</boolProp>
-          <boolProp name="IfController.useExpression">true</boolProp>
-        </IfController>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Simple Controller"/>
         <hashTree>
-          <SmtpSampler guiclass="SmtpSamplerGui" testclass="SmtpSampler" testname="SMTP Sampler" enabled="true">
-            <stringProp name="SMTPSampler.server">smtp.gmail.com</stringProp>
-            <stringProp name="SMTPSampler.serverPort">587</stringProp>
-            <stringProp name="SMTPSampler.mailFrom">madihasol123@gmail.com</stringProp>
-            <stringProp name="SMTPSampler.replyTo"></stringProp>
-            <stringProp name="SMTPSampler.receiverTo">wajhee@troontechnologies.com</stringProp>
-            <stringProp name="SMTPSampler.receiverCC"></stringProp>
-            <stringProp name="SMTPSampler.receiverBCC"></stringProp>
-            <stringProp name="SMTPSampler.subject">testing</stringProp>
-            <stringProp name="SMTPSampler.suppressSubject">false</stringProp>
-            <stringProp name="SMTPSampler.include_timestamp">true</stringProp>
-            <stringProp name="SMTPSampler.message">Load test failed. Please check logs.</stringProp>
-            <stringProp name="SMTPSampler.plainBody">false</stringProp>
-            <stringProp name="SMTPSampler.attachFile">C:\jmeter_logs\failed_responses.log</stringProp>
-            <stringProp name="SMTPSampler.useSSL">false</stringProp>
-            <stringProp name="SMTPSampler.useStartTLS">true</stringProp>
-            <stringProp name="SMTPSampler.trustAllCerts">false</stringProp>
-            <stringProp name="SMTPSampler.enforceStartTLS">false</stringProp>
-            <stringProp name="SMTPSampler.useLocalTrustStore">false</stringProp>
-            <stringProp name="SMTPSampler.trustStoreToUse"></stringProp>
-            <stringProp name="SMTPSampler.tlsProtocols"></stringProp>
-            <boolProp name="SMTPSampler.use_eml">false</boolProp>
-            <stringProp name="SMTPSampler.emlMessageToSend"></stringProp>
-            <stringProp name="SMTPSampler.useAuth">true</stringProp>
-            <stringProp name="SMTPSampler.password">isbgvsszttwvwbgm</stringProp>
-            <stringProp name="SMTPSampler.username">madihasol123@gmail.com</stringProp>
-            <stringProp name="SMTPSampler.messageSizeStatistics">false</stringProp>
-            <stringProp name="SMTPSampler.enableDebug">true</stringProp>
-            <collectionProp name="SMTPSampler.headerFields">
-              <elementProp name="" elementType="Argument">
-                <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value"></stringProp>
-              </elementProp>
-            </collectionProp>
-          </SmtpSampler>
-          <hashTree/>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller">
+            <stringProp name="IfController.condition">${__groovy(vars.get(&apos;sendEmail&apos;) == &apos;true&apos;)}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+            <boolProp name="IfController.useExpression">true</boolProp>
+          </IfController>
+          <hashTree>
+            <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="Throughput Controller">
+              <intProp name="ThroughputController.style">1</intProp>
+              <boolProp name="ThroughputController.perThread">false</boolProp>
+              <intProp name="ThroughputController.maxThroughput">1</intProp>
+              <FloatProperty>
+                <name>ThroughputController.percentThroughput</name>
+                <value>1.0</value>
+                <savedValue>0.0</savedValue>
+              </FloatProperty>
+            </ThroughputController>
+            <hashTree/>
+            <SmtpSampler guiclass="SmtpSamplerGui" testclass="SmtpSampler" testname="SMTP Sampler" enabled="true">
+              <stringProp name="SMTPSampler.server">smtp.gmail.com</stringProp>
+              <stringProp name="SMTPSampler.serverPort">587</stringProp>
+              <stringProp name="SMTPSampler.mailFrom">madihasol123@gmail.com</stringProp>
+              <stringProp name="SMTPSampler.replyTo"></stringProp>
+              <stringProp name="SMTPSampler.receiverTo">wajhee@troontechnologies.com</stringProp>
+              <stringProp name="SMTPSampler.receiverCC"></stringProp>
+              <stringProp name="SMTPSampler.receiverBCC"></stringProp>
+              <stringProp name="SMTPSampler.subject">testing</stringProp>
+              <stringProp name="SMTPSampler.suppressSubject">false</stringProp>
+              <stringProp name="SMTPSampler.include_timestamp">true</stringProp>
+              <stringProp name="SMTPSampler.message">Load test failed. Please check logs.</stringProp>
+              <stringProp name="SMTPSampler.plainBody">false</stringProp>
+              <stringProp name="SMTPSampler.attachFile">C:\jmeter_logs\failed_responses.log</stringProp>
+              <stringProp name="SMTPSampler.useSSL">false</stringProp>
+              <stringProp name="SMTPSampler.useStartTLS">true</stringProp>
+              <stringProp name="SMTPSampler.trustAllCerts">false</stringProp>
+              <stringProp name="SMTPSampler.enforceStartTLS">false</stringProp>
+              <stringProp name="SMTPSampler.useLocalTrustStore">false</stringProp>
+              <stringProp name="SMTPSampler.trustStoreToUse"></stringProp>
+              <stringProp name="SMTPSampler.tlsProtocols"></stringProp>
+              <boolProp name="SMTPSampler.use_eml">false</boolProp>
+              <stringProp name="SMTPSampler.emlMessageToSend"></stringProp>
+              <stringProp name="SMTPSampler.useAuth">true</stringProp>
+              <stringProp name="SMTPSampler.password">${__P(SMTP_PASS)}</stringProp>
+              <stringProp name="SMTPSampler.username">${__P(SMTP_USER)}</stringProp>
+              <stringProp name="SMTPSampler.messageSizeStatistics">false</stringProp>
+              <stringProp name="SMTPSampler.enableDebug">true</stringProp>
+              <collectionProp name="SMTPSampler.headerFields">
+                <elementProp name="" elementType="Argument">
+                  <stringProp name="Argument.name"></stringProp>
+                  <stringProp name="Argument.value"></stringProp>
+                </elementProp>
+              </collectionProp>
+            </SmtpSampler>
+            <hashTree/>
+          </hashTree>
         </hashTree>
       </hashTree>
-      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments">
           <elementProp name="PROCOTOL" elementType="Argument">
             <stringProp name="Argument.name">PROCOTOL</stringProp>
