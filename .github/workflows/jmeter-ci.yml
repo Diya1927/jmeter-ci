@@ -33,8 +33,8 @@ jobs:
             -l results.jtl \
             -e \
             -o jmeter-report \
-            -JSMTP_USER=${{ secrets.SMTP_USER }} \
-            -JSMTP_PASS=${{ secrets.SMTP_PASS }}
+            "-JSMTP_USER=${{ secrets.SMTP_USER }}"\
+            "-JSMTP_PASS=${{ secrets.SMTP_PASS }}"
 
       - name: Upload JMeter HTML Report
         uses: actions/upload-artifact@v4
